@@ -185,7 +185,7 @@ export default function TrademarkStep1Page() {
         </div>
 
         {/* 우선권 주장 */}
-        <div className="space-y-3">
+        <div className="space-y-3 mb-16">
           <Label className="text-base font-medium">
             우선권 주장 여부 <span className="text-red-500">*</span>
           </Label>
@@ -211,7 +211,7 @@ export default function TrademarkStep1Page() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="space-y-4 p-4 bg-gray-50 rounded-lg"
+            className="space-y-4 p-4 bg-gray-50 rounded-lg mb-16"
           >
             <div>
               <Label htmlFor="priorityCountry" className="text-base font-medium">

@@ -14,6 +14,24 @@ export interface NiceClassItem {
   goods: string[];
 }
 
+// 장바구니 아이템 (상표 1건)
+export interface CartItem {
+  id: string;
+  trademarkNameKo: string;
+  trademarkNameEn: string;
+  trademarkNameZh: string;
+  trademarkImage: string | null;
+  trademarkDescription: string;
+  needsChineseNameConsulting: boolean;
+  hasPriority: boolean;
+  priorityCountry: string;
+  priorityDate: string;
+  priorityNumber: string;
+  selectedClasses: NiceClassItem[];
+  createdAt: Date;
+  isSelected: boolean;
+}
+
 // 신청인 정보
 export interface Applicant {
   type: ApplicantType;
@@ -76,12 +94,21 @@ interface TrademarkStore {
   // 단계별 완료 상태
   completedSteps: number[];
 
+  // 장바구니
+  cart: CartItem[];
+
   // Actions
   setCurrentStep: (step: number) => void;
   updateData: (data: Partial<TrademarkData>) => void;
   completeStep: (step: number) => void;
   reset: () => void;
   resetStep: (step: number) => void;
+
+  // 장바구니 Actions
+  addToCart: () => void;
+  removeFromCart: (id: string) => void;
+  clearCart: () => void;
+  selectCartItem: (id: string) => void;
 }
 
 const initialData: TrademarkData = {
@@ -115,10 +142,11 @@ const initialData: TrademarkData = {
 
 export const useTrademarkStore = create<TrademarkStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       currentStep: 1,
       data: initialData,
       completedSteps: [],
+      cart: [],
 
       setCurrentStep: (step) => set({ currentStep: step }),
 
@@ -140,6 +168,63 @@ export const useTrademarkStore = create<TrademarkStore>()(
           data: initialData,
           completedSteps: [],
         }),
+
+      // 장바구니에 현재 상표 추가
+      addToCart: () => {
+        const state = get();
+        const { data } = state;
+
+        const newItem: CartItem = {
+          id: Date.now().toString(),
+          trademarkNameKo: data.trademarkNameKo || '(상표명 미입력)',
+          trademarkNameEn: data.trademarkNameEn,
+          trademarkNameZh: data.trademarkNameZh,
+          trademarkImage: data.trademarkImage,
+          trademarkDescription: data.trademarkDescription,
+          needsChineseNameConsulting: data.needsChineseNameConsulting,
+          hasPriority: data.hasPriority,
+          priorityCountry: data.priorityCountry,
+          priorityDate: data.priorityDate,
+          priorityNumber: data.priorityNumber,
+          selectedClasses: data.selectedClasses,
+          createdAt: new Date(),
+          isSelected: true, // 새로 추가된 아이템은 자동 선택
+        };
+
+        set((state) => ({
+          // 기존 아이템들은 선택 해제, 새 아이템은 선택됨
+          cart: [...state.cart.map(item => ({ ...item, isSelected: false })), newItem],
+          // 현재 입력 데이터 초기화
+          data: {
+            ...initialData,
+            applicant: state.data.applicant,
+            hasAgent: state.data.hasAgent,
+            agent: state.data.agent,
+          },
+          currentStep: 1,
+          completedSteps: [],
+        }));
+      },
+
+      removeFromCart: (id) =>
+        set((state) => {
+          const newCart = state.cart.filter((item) => item.id !== id);
+          // 삭제 후 선택된 아이템이 없으면 첫 번째 아이템 선택
+          if (newCart.length > 0 && !newCart.some(item => item.isSelected)) {
+            newCart[0].isSelected = true;
+          }
+          return { cart: newCart };
+        }),
+
+      clearCart: () => set({ cart: [] }),
+
+      selectCartItem: (id) =>
+        set((state) => ({
+          cart: state.cart.map(item => ({
+            ...item,
+            isSelected: item.id === id,
+          })),
+        })),
 
       resetStep: (step: number) =>
         set((state) => {
