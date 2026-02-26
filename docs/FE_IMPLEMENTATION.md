@@ -39,35 +39,23 @@
 - **스타일**: shadcn/ui 기반 미니멀 디자인
 - **컬러**: 블랙 모노톤 (단일 컬러)
 - **모션**: 요소 등장 시 부드러운 애니메이션
+- **이모지 금지**: 모든 UI 요소에서 이모지 사용하지 않음 (아이콘은 Lucide React 사용)
 
 ### 2.2 컬러 팔레트
 
+**사용 컬러 (2가지만):**
+
+| 용도 | Hex | 설명 |
+|---|---|---|
+| Primary | #09090B | 메인 텍스트, 버튼, 강조 |
+| Secondary | #71717A | 보조 텍스트, 설명문 |
+| Background | #FFFFFF | 배경색 |
+
 ```css
 :root {
-  /* Primary - Black Only */
-  --primary: 0 0% 0%;           /* #000000 */
-  --primary-foreground: 0 0% 100%; /* #FFFFFF */
-
-  /* Grayscale */
-  --background: 0 0% 100%;       /* #FFFFFF */
-  --foreground: 0 0% 0%;         /* #000000 */
-
-  --muted: 0 0% 96%;             /* #F5F5F5 */
-  --muted-foreground: 0 0% 45%;  /* #737373 */
-
-  --accent: 0 0% 96%;            /* #F5F5F5 */
-  --accent-foreground: 0 0% 0%;  /* #000000 */
-
-  --border: 0 0% 90%;            /* #E5E5E5 */
-  --input: 0 0% 90%;             /* #E5E5E5 */
-  --ring: 0 0% 0%;               /* #000000 */
-
-  /* Semantic */
-  --destructive: 0 84% 60%;      /* Red for errors */
-  --destructive-foreground: 0 0% 100%;
-
-  --success: 142 76% 36%;        /* Green for success */
-  --warning: 38 92% 50%;         /* Yellow for warnings */
+  --color-primary: #09090B;
+  --color-secondary: #71717A;
+  --color-background: #FFFFFF;
 }
 ```
 
@@ -489,7 +477,7 @@ src/
 │   ├── trademark/                # 상표 관련 컴포넌트
 │   │   ├── TrademarkTypeSelector.tsx
 │   │   ├── ImageUploader.tsx
-│   │   ├── NiceClassSelector.tsx
+│   │   ├── NICEClassSelector.tsx
 │   │   ├── GoodsSearchInput.tsx
 │   │   ├── QuotationTable.tsx
 │   │   └── ApplicantForm.tsx
@@ -539,7 +527,7 @@ src/
 │   └── constants.ts              # 상수
 │
 ├── data/                         # Mock 데이터
-│   ├── nice-classes.json         # Nice 분류 데이터
+│   ├── nice-classes.json         # NICE 분류 데이터
 │   ├── locarno-classes.json      # 로카르노 분류
 │   ├── countries.json            # 국가 목록
 │   ├── ipc-codes.json            # IPC 분류
@@ -790,10 +778,10 @@ export function FileUpload({
 }
 ```
 
-### 4.4 NiceClassSelector 컴포넌트
+### 4.4 NICEClassSelector 컴포넌트
 
 ```typescript
-// components/trademark/NiceClassSelector.tsx
+// components/trademark/NICEClassSelector.tsx
 'use client';
 
 import { useState, useMemo } from 'react';
@@ -804,21 +792,21 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/cn';
 import niceClasses from '@/data/nice-classes.json';
 
-interface NiceClass {
+interface NICEClass {
   classNumber: string;
   title: string;
   goods: { id: string; name: string }[];
 }
 
-interface NiceClassSelectorProps {
+interface NICEClassSelectorProps {
   selectedGoods: { classNumber: string; goodsId: string; name: string }[];
   onSelectionChange: (goods: { classNumber: string; goodsId: string; name: string }[]) => void;
 }
 
-export function NiceClassSelector({
+export function NICEClassSelector({
   selectedGoods,
   onSelectionChange,
-}: NiceClassSelectorProps) {
+}: NICEClassSelectorProps) {
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -1658,7 +1646,7 @@ export default function TrademarkStep1Page() {
 ### Phase 3: 상표 출원 (핵심)
 1. Stepper 컴포넌트
 2. Step 1: 상표정보 입력
-3. Step 2: 상품 선택 (Nice 분류)
+3. Step 2: 상품 선택 (NICE 분류)
 4. Step 3: 견적 확인 + PDF
 5. Step 4: 신청인 정보 & 제출
 6. 임시저장 기능
