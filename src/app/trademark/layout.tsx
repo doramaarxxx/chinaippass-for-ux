@@ -96,7 +96,7 @@ export default function TrademarkLayout({
                   key={item.step}
                   href={item.href}
                   className={cn(
-                    'flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300',
+                    'flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-300',
                     isActive
                       ? 'bg-[#09090B] text-white'
                       : isCompleted
@@ -163,7 +163,7 @@ export default function TrademarkLayout({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className={`p-6 lg:p-10 ${isStepPage ? 'pb-40' : ''}`}
+            className={`p-6 lg:p-10 ${isStepPage ? 'pb-52' : ''}`}
           >
             {children}
           </motion.div>
@@ -171,7 +171,7 @@ export default function TrademarkLayout({
 
         {/* 고정 하단 버튼 영역 */}
         {isStepPage && (
-          <div className="fixed bottom-0 left-0 lg:left-64 right-0 border-t border-gray-200 bg-white p-4 lg:p-6 shadow-[0_-4px_12px_-2px_rgba(0,0,0,0.03)] z-40">
+          <div className="fixed bottom-0 left-0 lg:left-64 right-0 border-t border-gray-200 bg-white px-4 py-3 lg:px-6 lg:py-3 shadow-[0_-4px_12px_-2px_rgba(0,0,0,0.03)] z-40">
             <div className="flex justify-between items-center">
               <div className="flex gap-2">
                 <Button

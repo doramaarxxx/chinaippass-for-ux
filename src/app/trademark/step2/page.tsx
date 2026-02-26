@@ -290,11 +290,11 @@ export default function TrademarkStep2Page() {
           상품 선택
         </h1>
         <p className="mt-2 text-sm" style={{ color: '#71717A' }}>
-          Nice 분류 체계에서 출원할 상품을 선택해주세요.
+          NICE 분류 체계에서 출원할 상품을 선택해주세요.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-[#F9F8F5] p-6 rounded-xl">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-[#F8F9FA] p-6 rounded-xl mb-6">
         {/* 류 선택 */}
         <div className="space-y-4">
           <div>
@@ -303,7 +303,7 @@ export default function TrademarkStep2Page() {
               value={classSearchQuery}
               onChange={(e) => setClassSearchQuery(e.target.value)}
               placeholder="분류 검색..."
-              className="mt-2"
+              className="mt-2 bg-white"
             />
           </div>
           <div className="relative">
@@ -319,8 +319,8 @@ export default function TrademarkStep2Page() {
                     onClick={() => setSelectedClass(cls.classNumber)}
                     className={`w-full text-left p-3 rounded-lg border transition-all duration-500 ease-out ${
                       selectedClass === cls.classNumber
-                        ? 'border-[#09090B] bg-gray-50'
-                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:scale-[0.96]'
+                        ? 'border-[#09090B] bg-white'
+                        : 'border-gray-200 bg-[#FCFCFC] hover:border-gray-300 hover:bg-white hover:scale-[0.96]'
                     }`}
                   >
                     <div className="flex justify-between items-center">
@@ -341,7 +341,7 @@ export default function TrademarkStep2Page() {
             <div
               className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
               style={{
-                background: 'linear-gradient(to bottom, transparent, rgba(249,248,245,0.9), #F9F8F5)'
+                background: 'linear-gradient(to bottom, transparent, rgba(248,249,250,0.9), #F8F9FA)'
               }}
             />
           </div>
@@ -355,16 +355,16 @@ export default function TrademarkStep2Page() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="상품 검색..."
-              className="mt-2"
+              className="mt-2 bg-white"
             />
           </div>
 
-          <div className="border border-gray-200 rounded-lg">
+          <div className="border border-gray-200 rounded-lg bg-[#FCFCFC]">
             {selectedClass ? (
               filteredGoods.length > 0 ? (
                 <>
                   {/* 전체 선택 체크박스 */}
-                  <label className="flex items-center gap-2 p-3 border-b border-gray-200 bg-gray-50 cursor-pointer">
+                  <label className="flex items-center gap-2 p-3 border-b border-gray-200 bg-white cursor-pointer">
                     <input
                       type="checkbox"
                       checked={isAllFilteredGoodsSelected}
