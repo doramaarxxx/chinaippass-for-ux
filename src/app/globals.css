@@ -195,3 +195,33 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Radial hover effect button */
+.btn-radial-hover {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #09090B !important;
+  color: white !important;
+  transition: color 1s ease-out !important;
+}
+.btn-radial-hover:hover {
+  background-color: #09090B !important;
+  color: #09090B !important;
+}
+.btn-radial-hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 1s ease-out;
+  z-index: -1;
+}
+.btn-radial-hover:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}

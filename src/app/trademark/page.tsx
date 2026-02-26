@@ -8,12 +8,12 @@ const STEPS_INFO = [
   {
     step: '01',
     title: '상표정보 입력',
-    description: '상표 유형, 상표명, 이미지 등 기본 정보를 입력합니다.',
+    description: '상표명, 이미지 등 기본 정보를 입력합니다.',
   },
   {
     step: '02',
     title: '상품 선택',
-    description: 'Nice 분류 체계에서 출원할 상품을 선택합니다.',
+    description: 'NICE 분류 체계에서 출원할 상품을 선택합니다.',
   },
   {
     step: '03',

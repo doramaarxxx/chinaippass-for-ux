@@ -42,8 +42,8 @@ export default function Home() {
               원스톱으로 해결하세요.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/auth/signup">
-                <Button size="lg" className="w-full sm:w-auto text-base px-8 h-14">
+              <Link href="/trademark">
+                <Button size="lg" className="w-full sm:w-auto text-base px-8 h-14 btn-radial-hover">
                   무료로 시작하기
                 </Button>
               </Link>
@@ -69,7 +69,8 @@ export default function Home() {
             <img
               src="/images/bg1.png"
               alt="China IP Pass"
-              className="w-full h-auto object-cover"
+              className="w-full object-cover"
+              style={{ maxHeight: '70vh' }}
             />
           </motion.div>
         </div>

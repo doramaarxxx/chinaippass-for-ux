@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -175,13 +176,15 @@ export default function TrademarkStep4Page() {
               신청인 정보를 입력하고 최종 제출해주세요.
             </p>
           </div>
-          <Button
+          <button
             type="button"
-            variant="outline"
             onClick={handleLoadUserInfo}
+            className="flex items-center gap-1.5 text-xs hover:text-gray-600 transition-colors"
+            style={{ color: '#71717A' }}
           >
+            <Download className="w-3.5 h-3.5" />
             회원 정보 불러오기
-          </Button>
+          </button>
         </div>
       </div>
 
